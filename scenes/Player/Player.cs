@@ -14,14 +14,18 @@ public class Player : KinematicBody
 
     public STATE state;
     public Camera camera;
+    Tool tool;
     Vector3 moveVector;
     int scalingPoint;
+    int scalingProgress;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         state = STATE.MOVING;
         scalingPoint = 1;
+        scalingProgress = 0;
         camera = this.GetNode<Camera>("Camera");
+        tool = camera.GetNode<Tool>("Hook");
         moveVector = new Vector3(0.0f, 0.0f, 0.0f);
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
@@ -71,14 +75,19 @@ public class Player : KinematicBody
             moveVector += camera.GlobalTransform.basis.x;
         moveVector = moveVector.Normalized();
 
+        if(Input.IsActionJustPressed("ui_accept"))
+            tool.shoot();
+
         MoveAndSlide(moveVector*speed);
     }
 
-    public bool checkScale(int enemyScalingPoint)
+    public bool checkScale(int enemyScalingPoint, int enemyScalingValue)
     {
-        if(scalingPoint > enemyScalingPoint)
+        if(scalingPoint >= enemyScalingPoint)
         {
-            scale();
+            scalingProgress += enemyScalingValue;
+            if(scalingProgress>=100)
+                scale();
             return true;
         }
         else
@@ -88,8 +97,12 @@ public class Player : KinematicBody
     }
     void scale()
     {
-        this.Scale *= 1.0f+scalingPoint/10.0f;
-        scalingPoint++;
+        if(scalingPoint < 3)
+        {
+            this.Scale *= 1.0f+scalingPoint/3.0f;
+            scalingPoint++;
+            scalingProgress=0;
+        }
     }
 
 }

@@ -14,6 +14,12 @@ config/name="MoonProject"
 run/main_scene="res://scenes/World.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/test_width=1024
+window/size/test_height=600
+window/stretch/mode="viewport"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

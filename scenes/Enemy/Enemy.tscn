@@ -12,15 +12,17 @@ extents = Vector3( 1.69167, 1.43083, 1.68314 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57245, 0 )
 shape = SubResource( 1 )
 
 [node name="TriggerArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45739, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TriggerArea"]
 shape = SubResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.5341, 0 )
 billboard = 1
 texture = ExtResource( 1 )
 

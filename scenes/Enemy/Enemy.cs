@@ -6,6 +6,8 @@ public class Enemy : KinematicBody
 	public enum STATE {
 		MOVING,
 		ATTACKING,
+		// TODO: define evade logic for smaller Enemies 
+		EVADING,
 		HOOKED
 	};
 	[Export]
@@ -34,7 +36,8 @@ public class Enemy : KinematicBody
 				Player player = this.GetParent().GetNode<Player>("Player");
 				if (player != null) 
 				{
-					moveVector = player.Transform.origin;
+					moveVector = player.Translation - this.Translation;
+					moveVector = moveVector.Normalized();
 				}
 				break;
 			case STATE.HOOKED:

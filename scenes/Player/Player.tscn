@@ -2,10 +2,11 @@
 
 [ext_resource path="res://scenes/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player/Tools/Hook/Hook.tscn" type="PackedScene" id=2]
-[ext_resource path="res://resources/ToolStats.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/Player/Tools/Hammer/Hammer.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
-height = 2.0
+radius = 0.5
+height = 2.79561
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -20,4 +21,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45732, 0 )
 
 [node name="Hook" parent="Camera" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.02459 )
-Stats = ExtResource( 3 )
+
+[node name="Hammer" parent="Camera" instance=ExtResource( 3 )]

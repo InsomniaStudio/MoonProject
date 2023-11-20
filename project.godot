@@ -20,6 +20,11 @@ window/size/test_width=1024
 window/size/test_height=600
 window/stretch/mode="viewport"
 
+[global]
+
+fps=false
+frame=true
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

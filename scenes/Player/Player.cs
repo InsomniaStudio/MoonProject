@@ -15,6 +15,8 @@ public class Player : KinematicBody
 	public STATE state;
 	public Camera camera;
 	Tool tool;
+	Hook hook;
+	Hammer hammer;
 	public Vector3 moveVector;
 	int scalingPoint;
 	int scalingProgress;
@@ -25,9 +27,13 @@ public class Player : KinematicBody
 		scalingPoint = 0;
 		scalingProgress = 0;
 		camera = this.GetNode<Camera>("Camera");
-		tool = camera.GetNode<Tool>("Hook");
+		hook = camera.GetNode<Hook>("Hook");
+		hammer = camera.GetNode<Hammer>("Hammer");
 		moveVector = new Vector3(0.0f, 0.0f, 0.0f);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		hook.visibility(true);
+		hook.visibility(false);
+		tool = hook;
 	}
 
 	public override void _Process(float delta)
@@ -77,6 +83,21 @@ public class Player : KinematicBody
 
 		if(Input.IsActionJustPressed("ui_accept"))
 			tool.shoot();
+		tool.select();
+
+		if(Input.IsActionJustPressed("ui_page_up"))
+		{
+			tool = hook;
+			hook.visibility(true);
+			hammer.visibility(false);
+		}
+
+		if(Input.IsActionJustPressed("ui_page_down"))
+		{
+			tool = hammer;
+			hook.visibility(false);
+			hammer.visibility(true);
+		}
 
 		MoveAndSlide(moveVector*speed);
 	}
@@ -100,7 +121,7 @@ public class Player : KinematicBody
 		if(scalingPoint < 3)
 		{
 			scalingPoint++;
-			this.Scale *= 1.0f+scalingPoint*0.25f;
+			this.Scale *= 1.0f+0.35f;
 			scalingProgress=0;
 		}
 	}

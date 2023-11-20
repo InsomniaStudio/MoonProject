@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Net.Sockets;
 
 public class Enemy : KinematicBody
 {
@@ -16,12 +17,16 @@ public class Enemy : KinematicBody
 	public int scalingValue;
 	public Vector3 moveVector;
 	public STATE state;
+	public bool selected;
 	float speed;
+	Sprite3D sprite;
 	public override void _Ready()
 	{
 		this.Scale *= 1+scalingPoint*0.25f;
 		speed = 100.0f;
+		selected = false;
 		state = STATE.MOVING;
+		sprite = GetNode<Sprite3D>("Sprite3D");
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -30,7 +35,8 @@ public class Enemy : KinematicBody
 		switch (state)
 		{
 			case STATE.MOVING:
-				moveVector = new Vector3(0.0f, 0.0f, 0.0f);	
+				moveVector = new Vector3(0.0f, 0.0f, 0.0f);
+				select();	
 				break;
 			case STATE.ATTACKING:
 				Player player = this.GetParent().GetNode<Player>("Player");
@@ -44,6 +50,22 @@ public class Enemy : KinematicBody
 				break;
 		}
 		MoveAndSlide(moveVector);
+	}
+	
+	public void scaleBack(int value)
+	{
+		scalingPoint -= value;
+		if(scalingPoint<0)
+			scalingPoint = 0;
+		else
+			this.Scale *= 0.75f;
+	}
+	public void select()
+	{
+		if(selected)
+			sprite.Modulate = new Color(0.67f, 0.67f, 0.67f, 1.0f);
+		else
+			sprite.Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	private void _on_TriggerArea_body_entered(object body)

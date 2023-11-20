@@ -19,4 +19,6 @@ public class Tool : Spatial
 	{
 
 	}
+
+	public virtual void select() {}
 }

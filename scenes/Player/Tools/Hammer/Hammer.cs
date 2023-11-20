@@ -1,20 +1,20 @@
 using Godot;
 using System;
 
-public class Hook : Tool
+public class Hammer : Tool
 {
-	RayCast raycast;
-	AnimationPlayer animPlayer;
+    RayCast raycast;
+	// AnimationPlayer animPlayer;
 	Enemy enemy;
-	Sprite sprite;
+    Sprite sprite;
 	
 	public override void _Ready()
 	{
 		raycast = GetNode<RayCast>("RayCast");
-		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
+        sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
+		// animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		raycast.Enabled = true;
-		raycast.CastTo = new Vector3(0.0f, 0.0f, -100.0f);
+		raycast.CastTo = new Vector3(0.0f, 0.0f, -5.0f);
 	}
 
     public override void _Process(float delta)
@@ -30,17 +30,17 @@ public class Hook : Tool
 		}
     }
     
-	public void visibility(bool value)
+    public void visibility(bool value)
 	{
 		sprite.Visible = value;
 	}
 	public override void shoot()
 	{
-		animPlayer.Play("hook_shoot");
+		// animPlayer.Play("hook_shoot");
 		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			Enemy enemy = (Enemy)raycast.GetCollider();
-			enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
+            enemy.scaleBack(1);
 			GD.Print(this.Name);
 		}
 	}

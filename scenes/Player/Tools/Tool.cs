@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.InteropServices;
 
 public class Tool : Spatial
 {
@@ -11,7 +12,8 @@ public class Tool : Spatial
 	{
 		if (toolStats is ToolStats stats) 
 		{
-			GD.Print(stats == null);
+			cooldown = stats.cooldown;
+			GD.Print(stats.cooldown);
 		}
 	}
 
@@ -21,4 +23,14 @@ public class Tool : Spatial
 	}
 
 	public virtual void select() {}
+
+	public void upgrade()
+	{
+		cooldown -= 5;
+		if(toolStats is ToolStats stats)
+		{
+			stats.cooldown = cooldown;
+			GD.Print(stats.cooldown);
+		}
+	}
 }

@@ -255,6 +255,7 @@ bld/
 Generated\ Files/
 
 # Files built by Visual Studio
+.mono/
 *_i.c
 *_p.c
 *_h.h

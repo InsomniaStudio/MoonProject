@@ -22,7 +22,7 @@ public class Player : KinematicBody
 	public override void _Ready()
 	{
 		state = STATE.MOVING;
-		scalingPoint = 1;
+		scalingPoint = 0;
 		scalingProgress = 0;
 		camera = this.GetNode<Camera>("Camera");
 		tool = camera.GetNode<Tool>("Hook");
@@ -99,8 +99,8 @@ public class Player : KinematicBody
 	{
 		if(scalingPoint < 3)
 		{
-			this.Scale *= 1.0f+scalingPoint/3.0f;
 			scalingPoint++;
+			this.Scale *= 1.0f+scalingPoint*0.25f;
 			scalingProgress=0;
 		}
 	}

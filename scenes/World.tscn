@@ -24,6 +24,7 @@ depth = 14.8083
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 6.20987 )
+scalingValue = 75
 
 [node name="Enemy3" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.59735, 0.5, 13.1886 )
@@ -31,10 +32,10 @@ scalingValue = 75
 
 [node name="Enemy4" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9763, 0.5, 19.0904 )
-scalingPoint = 3
+scalingPoint = 2
 scalingValue = 150
 
 [node name="Enemy2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-scalingPoint = 2
+scalingPoint = 1
 scalingValue = 100

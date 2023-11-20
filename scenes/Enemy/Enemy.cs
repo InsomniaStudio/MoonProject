@@ -19,7 +19,7 @@ public class Enemy : KinematicBody
 	float speed;
 	public override void _Ready()
 	{
-		this.Scale *= 1+scalingPoint/3.0f;
+		this.Scale *= 1+scalingPoint*0.25f;
 		speed = 100.0f;
 		state = STATE.MOVING;
 	}

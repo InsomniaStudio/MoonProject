@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1 )
+
+[node name="Tiles" type="Spatial"]
+
+[node name="FirstMesh" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="FirstMesh"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="FirstMesh/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FirstMesh/MeshInstance/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="SecondMesh" type="Spatial" parent="."]
+
+[node name="MeshInstance1" type="MeshInstance" parent="SecondMesh"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="SecondMesh/MeshInstance1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="SecondMesh/MeshInstance1/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="ThirdMesh" type="Spatial" parent="."]
+
+[node name="MeshInstance2" type="MeshInstance" parent="ThirdMesh"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="ThirdMesh/MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="ThirdMesh/MeshInstance2/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="FourthMesh" type="Spatial" parent="."]
+
+[node name="MeshInstance3" type="MeshInstance" parent="FourthMesh"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="FourthMesh/MeshInstance3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FourthMesh/MeshInstance3/StaticBody"]
+transform = Transform( 1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )

@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/TestToolsSprites/moon.jpg" type="Texture" id=3]
+[ext_resource path="res://scenes/MapMaker/GridMap.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 100, 1, 100 )
+
+[sub_resource type="PanoramaSky" id=4]
+panorama = ExtResource( 3 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 4 )
+background_color = Color( 0.188235, 0.117647, 0.117647, 1 )
+background_energy = 2.06
+ambient_light_color = Color( 0.721569, 0.682353, 0.682353, 1 )
+ambient_light_energy = 1.14
 
 [node name="World" type="Spatial"]
 
@@ -39,3 +52,12 @@ scalingValue = 150
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 scalingPoint = 1
 scalingValue = 100
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="GridMap" parent="." instance=ExtResource( 4 )]
+cell_scale = 4.0
+data = {
+"cells": PoolIntArray( 65512, 65529, 1, 65513, 65529, 1, 65514, 65529, 1, 65515, 65529, 1, 65516, 65529, 1, 65517, 65529, 1, 65518, 65529, 1, 65519, 65529, 1, 65520, 65529, 1, 65521, 65529, 1, 65522, 65529, 1, 65523, 65529, 1, 65524, 65529, 1 )
+}

@@ -4,7 +4,7 @@ using System;
 public class Hammer : Tool
 {
     RayCast raycast;
-	// AnimationPlayer animPlayer;
+	AnimationPlayer animPlayer;
 	Enemy enemy;
     Sprite sprite;
 	
@@ -12,7 +12,7 @@ public class Hammer : Tool
 	{
 		raycast = GetNode<RayCast>("RayCast");
         sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
-		// animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -5.0f);
 	}
@@ -36,7 +36,7 @@ public class Hammer : Tool
 	}
 	public override void shoot()
 	{
-		// animPlayer.Play("hook_shoot");
+		animPlayer.Play("hammer_shoot");
 		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			Enemy enemy = (Enemy)raycast.GetCollider();

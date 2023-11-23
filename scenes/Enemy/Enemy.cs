@@ -15,18 +15,30 @@ public class Enemy : KinematicBody
 	public int scalingPoint;
 	[Export]
 	public int scalingValue;
+	[Export]
+	public bool classicEnemy;
+	[Export]
+	public bool stoneEnemy;
+	[Export]
+	public bool slimeEnemy;
 	public Vector3 moveVector;
 	public STATE state;
 	public bool selected;
-	float speed;
-	Sprite3D sprite;
+	protected float speed;
+	protected Sprite3D sprite;
+	Player player;
+	public EnemySpawner enemySpawner;
 	public override void _Ready()
 	{
 		this.Scale *= 1+scalingPoint*0.25f;
-		speed = 100.0f;
+		speed = 5.0f;
 		selected = false;
 		state = STATE.MOVING;
 		sprite = GetNode<Sprite3D>("Sprite3D");
+		if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+		if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+		player = this.GetParent().GetNode<Player>("Player");
+		moveVector = new Vector3(1.0f, 0.0f, 0.0f);
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -35,21 +47,28 @@ public class Enemy : KinematicBody
 		switch (state)
 		{
 			case STATE.MOVING:
-				moveVector = new Vector3(0.0f, 0.0f, 0.0f);
+				if(this.IsOnWall())
+				{
+					GD.Print("collsiion");
+					moveVector.x*=-1;
+				}
+				if(this.Translation.DistanceTo(player.Translation) < 50.0f && scalingPoint>player.scalingPoint)
+					state = STATE.ATTACKING;
 				select();	
 				break;
 			case STATE.ATTACKING:
-				Player player = this.GetParent().GetNode<Player>("Player");
 				if (player != null) 
 				{
 					moveVector = player.Translation - this.Translation;
 					moveVector = moveVector.Normalized();
 				}
+				if(this.Translation.DistanceTo(player.Translation) > 50.0f)
+					state = STATE.MOVING;
 				break;
 			case STATE.HOOKED:
 				break;
 		}
-		MoveAndSlide(moveVector);
+		MoveAndSlide(moveVector*speed);
 	}
 	
 	public void scaleBack(int value)
@@ -65,7 +84,11 @@ public class Enemy : KinematicBody
 		if(selected)
 			sprite.Modulate = new Color(0.67f, 0.67f, 0.67f, 1.0f);
 		else
+		{
 			sprite.Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+			if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+		}
 	}
 
 	private void _on_TriggerArea_body_entered(object body)
@@ -78,7 +101,10 @@ public class Enemy : KinematicBody
 				state = STATE.ATTACKING;
 			}
 			if(player.checkScale(scalingPoint, scalingValue))
+			{
+				enemySpawner.enemyCounter--;
 				QueueFree();
+			}
 		}
 	}
 

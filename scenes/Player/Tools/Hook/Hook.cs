@@ -37,10 +37,11 @@ public class Hook : Tool
 	public override void shoot()
 	{
 		animPlayer.Play("hook_shoot");
-		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
+		if(raycast.IsColliding() && (((Node)raycast.GetCollider()).GetType() == typeof(Enemy)))
 		{
 			Enemy enemy = (Enemy)raycast.GetCollider();
-			enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
+			if(!enemy.stoneEnemy)
+				enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
 			GD.Print(this.Name);
 		}
 	}

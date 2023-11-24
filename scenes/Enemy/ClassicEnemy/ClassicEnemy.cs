@@ -4,5 +4,5 @@ using System.Data;
 
 public class ClassicEnemy : Enemy
 {
-    
+	
 }

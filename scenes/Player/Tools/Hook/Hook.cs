@@ -3,6 +3,7 @@ using System;
 
 public class Hook : Tool
 {
+	Resource toolStats;
 	RayCast raycast;
 	AnimationPlayer animPlayer;
 	Enemy enemy;
@@ -10,6 +11,11 @@ public class Hook : Tool
 	
 	public override void _Ready()
 	{
+		toolStats = GD.Load("res://resources/ToolStats.tres");
+		if (toolStats is ToolStats stats)
+		{
+			GD.Print(stats.cooldown);
+		}
 		raycast = GetNode<RayCast>("RayCast");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
@@ -17,9 +23,9 @@ public class Hook : Tool
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -100.0f);
 	}
 
-    public override void _Process(float delta)
-    {
-        if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
+	public override void _Process(float delta)
+	{
+		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			enemy = (Enemy)raycast.GetCollider();
 			enemy.selected = true;
@@ -28,8 +34,8 @@ public class Hook : Tool
 		{
 			enemy.selected = false;
 		}
-    }
-    
+	}
+	
 	public void visibility(bool value)
 	{
 		sprite.Visible = value;

@@ -13,7 +13,7 @@ public class Tool : Spatial
 		if (toolStats is ToolStats stats) 
 		{
 			cooldown = stats.cooldown;
-			GD.Print(stats.cooldown);
+			GD.Print(cooldown);
 		}
 	}
 

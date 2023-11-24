@@ -2,6 +2,5 @@ using Godot;
 
 public class ToolStats : Resource
 {
-	[Export]
-	public int cooldown;
+	public int cooldown = 69;
 }

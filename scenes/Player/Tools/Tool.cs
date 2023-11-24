@@ -4,17 +4,10 @@ using System.Runtime.InteropServices;
 
 public class Tool : Spatial
 {
-	[Export]
-	public Resource toolStats;
-	
+	// TODO: define more stats for tools
 	public int cooldown;
 	public override void _Ready()
 	{
-		if (toolStats is ToolStats stats) 
-		{
-			cooldown = stats.cooldown;
-			GD.Print(cooldown);
-		}
 	}
 
 	public virtual void shoot()
@@ -24,13 +17,8 @@ public class Tool : Spatial
 
 	public virtual void select() {}
 
+	// TODO: define upgrade for specific tool (Hook/Hammer)
 	public void upgrade()
 	{
-		cooldown -= 5;
-		if(toolStats is ToolStats stats)
-		{
-			stats.cooldown = cooldown;
-			GD.Print(stats.cooldown);
-		}
 	}
 }

@@ -128,7 +128,7 @@ public class Player : KinematicBody
 		if(scalingPoint < 3)
 		{
 			scalingPoint++;
-			this.Scale *= 1.0f+0.35f;
+			this.Scale *= 1.0f+0.25f;
 			scalingProgress=0;
 			hook.upgrade();
 			hammer.upgrade();

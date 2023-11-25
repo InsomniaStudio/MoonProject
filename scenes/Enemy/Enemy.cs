@@ -64,6 +64,7 @@ public class Enemy : KinematicBody
 				}
 				if(this.Translation.DistanceTo(player.Translation) > 50.0f)
 					state = STATE.MOVING;
+				select();	
 				break;
 			case STATE.HOOKED:
 				break;
@@ -81,7 +82,7 @@ public class Enemy : KinematicBody
 	}
 	public void select()
 	{
-		if(selected)
+		if(selected && (scalingPoint<=player.scalingPoint))
 			sprite.Modulate = new Color(0.67f, 0.67f, 0.67f, 1.0f);
 		else
 		{
@@ -91,7 +92,7 @@ public class Enemy : KinematicBody
 		}
 	}
 
-	private void _on_TriggerArea_body_entered(object body)
+	private void _on_TriggerArea_body_entered(Node body)
 	{
 		if(body.GetType() == typeof(Player))
 		{
@@ -108,7 +109,7 @@ public class Enemy : KinematicBody
 		}
 	}
 
-	private void _on_TriggerArea_body_exited(object body)
+	private void _on_TriggerArea_body_exited(Node body)
 	{
 		if(body.GetType() == typeof(Player))
 		{

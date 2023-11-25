@@ -28,6 +28,17 @@ public class Enemy : KinematicBody
 	protected Sprite3D sprite;
 	Player player;
 	public EnemySpawner enemySpawner;
+	
+	public Enemy(Enemy other)
+	{
+		speed = other.speed;
+		selected = other.selected;
+		state = other.state;
+		sprite = other.sprite;
+		player = other.player;
+		moveVector = other.moveVector;
+	}
+	
 	public override void _Ready()
 	{
 		this.Scale *= 1+scalingPoint*0.25f;

@@ -18,7 +18,7 @@ public class Tool : Spatial
 	public virtual void select() {}
 
 	// TODO: define upgrade for specific tool (Hook/Hammer)
-	public void upgrade()
+	public virtual void upgrade()
 	{
 	}
 }

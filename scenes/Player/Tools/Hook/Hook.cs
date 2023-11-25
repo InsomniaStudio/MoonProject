@@ -40,6 +40,7 @@ public class Hook : Tool
 	{
 		sprite.Visible = value;
 	}
+	
 	public override void shoot()
 	{
 		animPlayer.Play("hook_shoot");
@@ -49,6 +50,16 @@ public class Hook : Tool
 			if(!enemy.stoneEnemy)
 				enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
 			GD.Print(this.Name);
+		}
+	}
+	
+	public override void upgrade()
+	{
+		toolStats = GD.Load("res://resources/ToolStats.tres");
+		if (toolStats is ToolStats stats)
+		{
+			stats.cooldown -= 5;
+			GD.Print(stats.cooldown);
 		}
 	}
 }

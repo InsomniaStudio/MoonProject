@@ -51,4 +51,14 @@ public class Hammer : Tool
 			GD.Print(this.Name);
 		}
 	}
+	
+	public override void upgrade()
+	{
+		toolStats = GD.Load("res://resources/ToolStats.tres");
+		if (toolStats is ToolStats stats)
+		{
+			stats.cooldown -= 5;
+			GD.Print(stats.cooldown);
+		}
+	}
 }

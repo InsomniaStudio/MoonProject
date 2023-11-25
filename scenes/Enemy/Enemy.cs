@@ -43,7 +43,6 @@ public class Enemy : KinematicBody
 
 	public override void _PhysicsProcess(float delta)
 	{
-//		GD.Print(state);
 		switch (state)
 		{
 			case STATE.MOVING:

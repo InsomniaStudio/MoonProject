@@ -130,7 +130,7 @@ public class Player : KinematicBody
 			scalingPoint++;
 			this.Scale *= 1.0f+0.25f;
 			scalingProgress=0;
-			hook.upgrade();
+//			hook.upgrade();
 			hammer.upgrade();
 		}
 	}

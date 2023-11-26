@@ -47,7 +47,7 @@ public class Hammer : Tool
 		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			enemy.scaleBack(1);
-			enemy.halfed();
+			if (enemy.slimeEnemy) enemy.halfed();
 			GD.Print(this.Name);
 		}
 	}

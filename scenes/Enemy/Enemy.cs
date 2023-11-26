@@ -106,11 +106,20 @@ public class Enemy : KinematicBody
 		if(body.GetType() == typeof(Player))
 		{
 			Player player = (Player)body;
+			if (!player.checkScale(scalingPoint, scalingValue))
+			{
+				player.health -= 5;	
+				if (player.health == 0)
+				{
+					this.GetTree().ReloadCurrentScene();
+				}
+			}
+			GD.Print(player.health);
 			if (player != null) 
 			{
 				state = STATE.ATTACKING;
 			}
-			if(player.checkScale(scalingPoint, scalingValue))
+			if (player.checkScale(scalingPoint, scalingValue))
 			{
 				enemySpawner.enemyCounter--;
 				QueueFree();

@@ -22,17 +22,19 @@ public class Player : KinematicBody
 	public Vector3 moveVector;
 	public int scalingPoint;
 	int scalingProgress;
+	public int health;
 	
 	public override void _Ready()
 	{
-		levelStats = GD.Load("res://resources/LevelStats.tres");
-		if (levelStats is LevelStats stats)
-		{
-			GD.Print(stats.level);
-		}
+//		levelStats = GD.Load("res://resources/LevelStats.tres");
+//		if (levelStats is LevelStats stats)
+//		{
+//			GD.Print(stats.level);
+//		}
 		state = STATE.MOVING;
 		scalingPoint = 0;
 		scalingProgress = 0;
+		health = 100;
 		camera = this.GetNode<Camera>("Camera");
 		hook = camera.GetNode<Hook>("Hook");
 		hammer = camera.GetNode<Hammer>("Hammer");

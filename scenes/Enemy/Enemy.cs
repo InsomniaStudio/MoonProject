@@ -6,8 +6,7 @@ public class Enemy : KinematicBody
 {
 	public enum STATE {
 		MOVING,
-		ATTACKING,
-		// TODO: define evade logic for smaller Enemies 
+		ATTACKING, 
 		EVADING,
 		HOOKED
 	};
@@ -29,16 +28,6 @@ public class Enemy : KinematicBody
 	Player player;
 	public EnemySpawner enemySpawner;
 	
-	public Enemy(Enemy other)
-	{
-		speed = other.speed;
-		selected = other.selected;
-		state = other.state;
-		sprite = other.sprite;
-		player = other.player;
-		moveVector = other.moveVector;
-	}
-	
 	public override void _Ready()
 	{
 		this.Scale *= 1+scalingPoint*0.25f;
@@ -59,7 +48,7 @@ public class Enemy : KinematicBody
 			case STATE.MOVING:
 				if(this.IsOnWall())
 				{
-					GD.Print("collsiion");
+					GD.Print("colision");
 					moveVector.x*=-1;
 				}
 				if(this.Translation.DistanceTo(player.Translation) < 50.0f && scalingPoint>player.scalingPoint)
@@ -80,6 +69,16 @@ public class Enemy : KinematicBody
 				break;
 		}
 		MoveAndSlide(moveVector*speed);
+	}
+	
+	public void halfed()
+	{
+		Enemy enemy = (Enemy)ResourceLoader.Load<PackedScene>("res://scenes/Enemy/Enemy.tscn").Instance();
+		enemy.scalingPoint = scalingPoint;
+		enemy.scalingValue = scalingValue;
+		enemy.enemySpawner = this.enemySpawner;
+		enemy.Translation = this.Translation + new Vector3(10.0f, 0.0f, 0.0f);
+		this.GetParent().AddChild(enemy);
 	}
 	
 	public void scaleBack(int value)

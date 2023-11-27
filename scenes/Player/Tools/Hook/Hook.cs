@@ -6,6 +6,7 @@ public class Hook : Tool
 	Resource toolStats;
 	RayCast raycast;
 	AnimationPlayer animPlayer;
+	public AnimationPlayer animPlayer2;
 	Enemy enemy;
 	Sprite sprite;
 	
@@ -18,6 +19,7 @@ public class Hook : Tool
 		}
 		raycast = GetNode<RayCast>("RayCast");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -100.0f);
@@ -61,5 +63,13 @@ public class Hook : Tool
 			stats.cooldown -= 5;
 			GD.Print(stats.cooldown);
 		}
+	}
+
+	public override void move(bool status)
+	{
+		if(status)
+			animPlayer2.Play("moving");
+		else
+			animPlayer2.Stop();
 	}
 }

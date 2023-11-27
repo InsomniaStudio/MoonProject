@@ -21,4 +21,7 @@ public class Tool : Spatial
 	public virtual void upgrade()
 	{
 	}
+
+	public virtual void move(bool status)
+	{}
 }

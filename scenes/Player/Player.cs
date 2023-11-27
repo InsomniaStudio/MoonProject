@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public class Player : KinematicBody
 {
@@ -19,6 +20,8 @@ public class Player : KinematicBody
 	Tool tool;
 	Hook hook;
 	Hammer hammer;
+	ColorRect colorRect;
+	Timer colorTimer;
 	public Vector3 moveVector;
 	public int scalingPoint;
 	int scalingProgress;
@@ -38,6 +41,8 @@ public class Player : KinematicBody
 		camera = this.GetNode<Camera>("Camera");
 		hook = camera.GetNode<Hook>("Hook");
 		hammer = camera.GetNode<Hammer>("Hammer");
+		colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect");
+		colorTimer = GetNode<Spatial>("Timers").GetNode<Timer>("ColorTimer");
 		moveVector = new Vector3(0.0f, 0.0f, 0.0f);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		hook.visibility(true);
@@ -108,6 +113,11 @@ public class Player : KinematicBody
 			hammer.visibility(true);
 		}
 
+		if(moveVector != new Vector3(0.0f, 0.0f, 0.0f))
+			tool.move(true);
+		else
+			tool.move(false);
+
 		MoveAndSlide(moveVector*speed);
 	}
 
@@ -116,6 +126,8 @@ public class Player : KinematicBody
 		if(scalingPoint >= enemyScalingPoint)
 		{
 			scalingProgress += enemyScalingValue;
+			colorRect.Visible = true;
+			colorTimer.Start();
 			if(scalingProgress>=100)
 				scale();
 			return true;
@@ -135,6 +147,11 @@ public class Player : KinematicBody
 //			hook.upgrade();
 			hammer.upgrade();
 		}
+	}
+
+	public void _on_ColorTimer_timeout()
+	{
+		colorRect.Visible = false;
 	}
 
 }

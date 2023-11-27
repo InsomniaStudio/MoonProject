@@ -7,6 +7,7 @@ public class Hammer : Tool
 	
 	RayCast raycast;
 	AnimationPlayer animPlayer;
+	public AnimationPlayer animPlayer2;
 	Enemy enemy;
 	Sprite sprite;
 	
@@ -20,6 +21,7 @@ public class Hammer : Tool
 		raycast = GetNode<RayCast>("RayCast");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -5.0f);
 	}
@@ -47,6 +49,8 @@ public class Hammer : Tool
 		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			enemy.scaleBack(1);
+			enemy.hammerDamage.Emitting = true;
+			enemy.hammerDamage.OneShot = true;
 			if (enemy.slimeEnemy) enemy.halfed();
 			GD.Print(this.Name);
 		}
@@ -60,5 +64,13 @@ public class Hammer : Tool
 			stats.cooldown -= 5;
 			GD.Print(stats.cooldown);
 		}
+	}
+
+	public override void move(bool status)
+	{
+		if(status)
+			animPlayer2.Play("moving");
+		else
+			animPlayer2.Stop();
 	}
 }

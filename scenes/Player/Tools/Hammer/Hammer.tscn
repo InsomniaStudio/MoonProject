@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/TestToolsSprites/gun.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Tools/Hammer/Hammer.cs" type="Script" id=2]
-[ext_resource path="res://scenes/Enemy/Enemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "hammer_shoot"
@@ -20,14 +19,44 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 0 ]
 }
 
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 322, 444 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "moving"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 279, 407 ), Vector2( 322, 444 ), Vector2( 279, 407 ), Vector2( 279, 464 ), Vector2( 279, 407 ) ]
+}
+
 [node name="Hammer" type="Spatial"]
 script = ExtResource( 2 )
-enemyScene = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 296, 397 )
+position = Vector2( 322, 444 )
 scale = Vector2( 0.796875, 0.796875 )
 texture = ExtResource( 1 )
 flip_h = true
@@ -40,3 +69,7 @@ debug_shape_custom_color = Color( 1, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hammer_shoot = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/moving = SubResource( 2 )

@@ -23,3 +23,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45732, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.02459 )
 
 [node name="Hammer" parent="Camera" instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0.427451, 0.215686, 0.560784 )
+
+[node name="Timers" type="Spatial" parent="."]
+
+[node name="ColorTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+
+[connection signal="timeout" from="Timers/ColorTimer" to="." method="_on_ColorTimer_timeout"]

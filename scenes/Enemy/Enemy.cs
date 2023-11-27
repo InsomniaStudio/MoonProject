@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 
 public class Enemy : KinematicBody
 {
@@ -27,6 +28,8 @@ public class Enemy : KinematicBody
 	protected Sprite3D sprite;
 	Player player;
 	public EnemySpawner enemySpawner;
+	public Particles hammerDamage;
+	AnimationPlayer animPlayer;
 	
 	public override void _Ready()
 	{
@@ -35,6 +38,8 @@ public class Enemy : KinematicBody
 		selected = false;
 		state = STATE.MOVING;
 		sprite = GetNode<Sprite3D>("Sprite3D");
+		hammerDamage = GetNode<Particles>("Particles");
+		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
 		if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 		player = this.GetParent().GetNode<Player>("Player");
@@ -43,6 +48,8 @@ public class Enemy : KinematicBody
 
 	public override void _PhysicsProcess(float delta)
 	{
+		if(!animPlayer.IsPlaying())
+			animPlayer.Play("moving");
 		switch (state)
 		{
 			case STATE.MOVING:
@@ -73,12 +80,13 @@ public class Enemy : KinematicBody
 	
 	public void halfed()
 	{
-		Enemy enemy = (Enemy)ResourceLoader.Load<PackedScene>("res://scenes/Enemy/Enemy.tscn").Instance();
+		Enemy enemy = (Enemy)(ResourceLoader.Load<PackedScene>("res://scenes/Enemy/ClassicEnemy/ClassicEnemy.tscn").Instance());
 		enemy.scalingPoint = scalingPoint;
 		enemy.scalingValue = scalingValue;
 		enemy.enemySpawner = this.enemySpawner;
-		enemy.Translation = this.Translation + new Vector3(10.0f, 0.0f, 0.0f);
+		this.enemySpawner.enemyCounter++;
 		this.GetParent().AddChild(enemy);
+		enemy.Translation = this.Translation + new Vector3(2.0f, 0.0f, 0.0f);
 	}
 	
 	public void scaleBack(int value)
@@ -88,6 +96,7 @@ public class Enemy : KinematicBody
 			scalingPoint = 0;
 		else
 			this.Scale *= 0.75f;
+		animPlayer.Play("hurt");
 	}
 	public void select()
 	{
@@ -137,5 +146,11 @@ public class Enemy : KinematicBody
 				state = STATE.MOVING;
 			}
 		}
+	}
+
+	public void _on_AnimationPlayer_animation_finished(string animName)
+	{
+		if(animName == "hurt")
+			animPlayer.Play("moving");
 	}
 }

@@ -4,3 +4,4 @@
 
 [node name="ClassicEnemy" instance=ExtResource( 1 )]
 classicEnemy = true
+slimeEnemy = true

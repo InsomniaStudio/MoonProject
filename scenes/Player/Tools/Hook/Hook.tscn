@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/TestToolsSprites/gun.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player/Tools/Hook/Hook.cs" type="Script" id=2]
@@ -19,13 +19,29 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 0 ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "moving"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 775, 407 ), Vector2( 780, 464 ), Vector2( 764, 407 ), Vector2( 780, 464 ), Vector2( 775, 407 ) ]
+}
+
 [node name="Hook" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 743, 407 )
+position = Vector2( 775, 407 )
 scale = Vector2( 0.818359, 0.753906 )
 texture = ExtResource( 1 )
 hframes = 4
@@ -38,3 +54,6 @@ debug_shape_thickness = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hook_shoot = SubResource( 1 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/moving = SubResource( 3 )

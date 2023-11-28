@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy/EnemySpawner/EnemySpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Enemy/ClassicEnemy/ClassicEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Levels/Level2/Level2_1.tscn" type="PackedScene" id=4]
 
 [node name="Level1_3" instance=ExtResource( 1 )]
 
@@ -22,6 +23,7 @@ __meta__ = {
 
 [node name="Finish" parent="." index="5"]
 transform = Transform( -2.99992, 0, -0.0215724, 0, 1, 0, 0.0215724, 0, -2.99992, 31.6212, 7.54495, 22.5114 )
+nextLevel = ExtResource( 4 )
 
 [node name="EnemySpawner" parent="." index="6" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.0002, 0, -25.2048 )

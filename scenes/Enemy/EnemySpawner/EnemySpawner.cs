@@ -13,7 +13,11 @@ public class EnemySpawner : Spatial
 	[Export]
 	int scalingValue;
 	[Export]
-	public PackedScene enemyScene;
+	public PackedScene classicScene;
+	[Export]
+	public PackedScene stoneScene;
+	[Export]
+	public PackedScene slimeScene;
 	public int enemyCounter = 0;
 	Timer timer;
 	RandomNumberGenerator random;
@@ -26,14 +30,15 @@ public class EnemySpawner : Spatial
 	public void _on_Timer_timeout()
 	{
 		random.Randomize();
-		float tmp = random.Randf();
+		uint tmp = random.Randi()%3+1;
+		GD.Print(tmp);
 		if(enemyCounter < 3)
 		{
-			switch (Math.Round(tmp))
+			switch (tmp)
 			{
-				case 0 :
+				case 1 :
 				{
-					Enemy enemy = (Enemy)ResourceLoader.Load<PackedScene>("res://scenes/Enemy/StoneEnemy/StoneEnemy.tscn").Instance();
+					Enemy enemy = (Enemy)classicScene.Instance();
 					enemy.scalingPoint = scalingPoint;
 					enemy.scalingValue = scalingValue;
 					enemy.enemySpawner = this;
@@ -42,9 +47,20 @@ public class EnemySpawner : Spatial
 					enemyCounter++;
 					break;
 				}
-				case 1 :
+				case 2 :
 				{
-					Enemy enemy = (Enemy)ResourceLoader.Load<PackedScene>("res://scenes/Enemy/ClassicEnemy/ClassicEnemy.tscn").Instance();
+					Enemy enemy = (Enemy)stoneScene.Instance();
+					enemy.scalingPoint = scalingPoint;
+					enemy.scalingValue = scalingValue;
+					enemy.enemySpawner = this;
+					GetParent().AddChild(enemy);
+					enemy.Translation = new Vector3(this.Translation.x, 0.5f, this.Translation.z);
+					enemyCounter++;
+					break;
+				}
+				case 3:
+				{
+					Enemy enemy = (Enemy)slimeScene.Instance();
 					enemy.scalingPoint = scalingPoint;
 					enemy.scalingValue = scalingValue;
 					enemy.enemySpawner = this;
@@ -56,7 +72,7 @@ public class EnemySpawner : Spatial
 			}
 			
 		}
-		Translation = new Vector3(this.Translation.x, 0.5f, tmp*(RangeUp-RangeDown)-RangeDown);
+		Translation = new Vector3(this.Translation.x, 0.5f, random.RandfRange(RangeDown, RangeDown));
 		timer.Start();
 	}
 }

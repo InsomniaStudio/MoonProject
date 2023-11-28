@@ -61,7 +61,6 @@ public class Hook : Tool
 		if (toolStats is ToolStats stats)
 		{
 			stats.cooldown -= 5;
-			GD.Print(stats.cooldown);
 		}
 	}
 

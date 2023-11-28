@@ -12,6 +12,10 @@ public class Player : KinematicBody
 	public int speed;
 	[Export]
 	public float mouseSens;
+	[Export]
+	public bool haveHook;
+	[Export]
+	public bool haveHammer;
 
 	Resource levelStats;
 	
@@ -21,6 +25,8 @@ public class Player : KinematicBody
 	Hook hook;
 	Hammer hammer;
 	ColorRect colorRect;
+	ColorRect colorRect2;
+	ProgressBar progressBar;
 	Timer colorTimer;
 	public Vector3 moveVector;
 	public int scalingPoint;
@@ -42,12 +48,15 @@ public class Player : KinematicBody
 		hook = camera.GetNode<Hook>("Hook");
 		hammer = camera.GetNode<Hammer>("Hammer");
 		colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect");
+		colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect2");
+		progressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<ProgressBar>("ProgressBar");
 		colorTimer = GetNode<Spatial>("Timers").GetNode<Timer>("ColorTimer");
 		moveVector = new Vector3(0.0f, 0.0f, 0.0f);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		hook.visibility(true);
 		hook.visibility(false);
-		tool = hook;
+		hammer.visibility(false);
+		if(haveHook) tool = hook;
+		if(haveHammer) tool = hammer;
 	}
 
 	public override void _Process(float delta)
@@ -95,29 +104,31 @@ public class Player : KinematicBody
 			moveVector += camera.GlobalTransform.basis.x;
 		moveVector = moveVector.Normalized();
 
-		if(Input.IsActionJustPressed("ui_accept"))
+		if(Input.IsActionJustPressed("ui_accept") && tool != null)
 			tool.shoot();
-		tool.select();
+		if(tool != null)
+			tool.select();
 
-		if(Input.IsActionJustPressed("ui_page_up"))
+		if(Input.IsActionJustPressed("ui_page_up") && haveHook)
 		{
 			tool = hook;
 			hook.visibility(true);
 			hammer.visibility(false);
 		}
 
-		if(Input.IsActionJustPressed("ui_page_down"))
+		if(Input.IsActionJustPressed("ui_page_down") && haveHammer)
 		{
 			tool = hammer;
 			hook.visibility(false);
 			hammer.visibility(true);
 		}
 
-		if(moveVector != new Vector3(0.0f, 0.0f, 0.0f))
+		if(moveVector != new Vector3(0.0f, 0.0f, 0.0f) && tool!=null)
 			tool.move(true);
-		else
+		else if(tool!=null)
 			tool.move(false);
 
+		progressBar.Value = health;
 		MoveAndSlide(moveVector*speed);
 	}
 
@@ -126,10 +137,15 @@ public class Player : KinematicBody
 		if(scalingPoint >= enemyScalingPoint)
 		{
 			scalingProgress += enemyScalingValue;
-			colorRect.Visible = true;
-			colorTimer.Start();
+			GD.Print(scalingProgress);
 			if(scalingProgress>=100)
+			{
+				colorRect2.Visible = true;
 				scale();
+			}
+			else
+				colorRect.Visible = true;
+			colorTimer.Start();
 			return true;
 		}
 		else
@@ -143,15 +159,16 @@ public class Player : KinematicBody
 		{
 			scalingPoint++;
 			this.Scale *= 1.0f+0.25f;
-			scalingProgress=0;
 //			hook.upgrade();
 			hammer.upgrade();
 		}
+		scalingProgress=0;
 	}
 
 	public void _on_ColorTimer_timeout()
 	{
 		colorRect.Visible = false;
+		colorRect2.Visible = false;
 	}
 
 }

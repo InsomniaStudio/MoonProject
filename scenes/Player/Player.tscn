@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player/Tools/Hook/Hook.tscn" type="PackedScene" id=2]
@@ -7,6 +7,14 @@
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 2.79561
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.819608, 0.87451, 0.482353, 1 )
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.211765, 0.188235, 0.384314, 1 )
+shadow_color = Color( 0.121569, 0.121569, 0.121569, 0.6 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -31,6 +39,31 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.145098, 0.427451, 0.215686, 0.560784 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.623529, 0.635294, 0.243137, 0.654902 )
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_bottom = 28.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+value = 100.0
+percent_visible = false
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 2.0
+margin_bottom = 2.0
+color = Color( 0.329412, 0.133333, 0.541176, 1 )
 
 [node name="Timers" type="Spatial" parent="."]
 

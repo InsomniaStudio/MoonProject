@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Finish/Finish.cs" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.75396, 1, 1.89946 )
+
+[sub_resource type="SpatialMaterial" id=3]
+
+[sub_resource type="PrismMesh" id=2]
+material = SubResource( 3 )
+left_to_right = 0.0
+
+[node name="Finish" type="Area"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Finish_body_entered"]

@@ -2,5 +2,5 @@
 
 [ext_resource path="res://scenes/Enemy/Enemy.tscn" type="PackedScene" id=1]
 
-[node name="ClassicEnemy" instance=ExtResource( 1 )]
-classicEnemy = true
+[node name="SlimeEnemy" instance=ExtResource( 1 )]
+slimeEnemy = true

@@ -55,7 +55,6 @@ public class Enemy : KinematicBody
 			case STATE.MOVING:
 				if(this.IsOnWall())
 				{
-					GD.Print("colision");
 					moveVector.x*=-1;
 				}
 				if(this.Translation.DistanceTo(player.Translation) < 50.0f && scalingPoint>player.scalingPoint)
@@ -115,15 +114,6 @@ public class Enemy : KinematicBody
 		if(body.GetType() == typeof(Player))
 		{
 			Player player = (Player)body;
-			if (!player.checkScale(scalingPoint, scalingValue))
-			{
-				player.health -= 5;	
-				if (player.health == 0)
-				{
-					this.GetTree().ReloadCurrentScene();
-				}
-			}
-			GD.Print(player.health);
 			if (player != null) 
 			{
 				state = STATE.ATTACKING;
@@ -132,6 +122,14 @@ public class Enemy : KinematicBody
 			{
 				enemySpawner.enemyCounter--;
 				QueueFree();
+			}
+			else
+			{
+				player.health -= 5;	
+				if (player.health == 0)
+				{
+					this.GetTree().ReloadCurrentScene();
+				}
 			}
 		}
 	}

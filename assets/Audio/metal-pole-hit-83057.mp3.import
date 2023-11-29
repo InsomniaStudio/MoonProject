@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/metal-pole-hit-83057.mp3-519bfeacc6fbd5953bf719e04b1f0c84.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/metal-pole-hit-83057.mp3"
+dest_files=[ "res://.import/metal-pole-hit-83057.mp3-519bfeacc6fbd5953bf719e04b1f0c84.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

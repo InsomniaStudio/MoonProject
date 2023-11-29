@@ -13,11 +13,6 @@ public class Hammer : Tool
 	
 	public override void _Ready()
 	{
-		toolStats = GD.Load("res://resources/ToolStats.tres");
-		if (toolStats is ToolStats stats)
-		{
-			GD.Print(stats.cooldown);
-		}
 		raycast = GetNode<RayCast>("RayCast");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -52,7 +47,6 @@ public class Hammer : Tool
 			enemy.hammerDamage.Emitting = true;
 			enemy.hammerDamage.OneShot = true;
 			if (enemy.slimeEnemy) enemy.halfed();
-			GD.Print(this.Name);
 		}
 	}
 	

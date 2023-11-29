@@ -31,7 +31,6 @@ public class EnemySpawner : Spatial
 	{
 		random.Randomize();
 		uint tmp = random.Randi()%3+1;
-		GD.Print(tmp);
 		if(enemyCounter < 3)
 		{
 			switch (tmp)

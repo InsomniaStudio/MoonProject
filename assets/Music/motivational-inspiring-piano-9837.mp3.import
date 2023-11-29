@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/motivational-inspiring-piano-9837.mp3-6bcbcd9ed50264bb5c44b82e9076635a.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/motivational-inspiring-piano-9837.mp3"
+dest_files=[ "res://.import/motivational-inspiring-piano-9837.mp3-6bcbcd9ed50264bb5c44b82e9076635a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

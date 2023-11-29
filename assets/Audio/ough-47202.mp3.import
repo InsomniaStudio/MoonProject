@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ough-47202.mp3-8898d7c807c66d21bf30e661919128b0.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/ough-47202.mp3"
+dest_files=[ "res://.import/ough-47202.mp3-8898d7c807c66d21bf30e661919128b0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

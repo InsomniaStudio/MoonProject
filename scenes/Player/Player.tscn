@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player/Tools/Hook/Hook.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Player/Tools/Hammer/Hammer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Audio/3-up-2-89189.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/Audio/power-up-sparkle-1-177983.mp3" type="AudioStream" id=5]
+[ext_resource path="res://assets/Audio/ough-47202.mp3" type="AudioStream" id=6]
+[ext_resource path="res://assets/Audio/going-on-a-forest-road-gravel-and-grass-6404.mp3" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -65,9 +69,29 @@ margin_right = 2.0
 margin_bottom = 2.0
 color = Color( 0.329412, 0.133333, 0.541176, 1 )
 
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.462745, 0.164706, 0.164706, 0.658824 )
+
 [node name="Timers" type="Spatial" parent="."]
 
 [node name="ColorTimer" type="Timer" parent="Timers"]
 wait_time = 0.3
+
+[node name="AudioPlayers" type="Spatial" parent="."]
+
+[node name="PickUp" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 4 )
+
+[node name="Damage" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 6 )
+
+[node name="ScaleUp" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 5 )
+
+[node name="Walking" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 7 )
 
 [connection signal="timeout" from="Timers/ColorTimer" to="." method="_on_ColorTimer_timeout"]

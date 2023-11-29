@@ -30,6 +30,7 @@ public class Enemy : KinematicBody
 	public EnemySpawner enemySpawner;
 	public Particles hammerDamage;
 	AnimationPlayer animPlayer;
+	public AudioStreamPlayer audioPlayer;
 	
 	public override void _Ready()
 	{
@@ -40,6 +41,7 @@ public class Enemy : KinematicBody
 		sprite = GetNode<Sprite3D>("Sprite3D");
 		hammerDamage = GetNode<Particles>("Particles");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
 		if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 		player = this.GetParent().GetNode<Player>("Player");
@@ -125,11 +127,7 @@ public class Enemy : KinematicBody
 			}
 			else
 			{
-				player.health -= 5;	
-				if (player.health == 0)
-				{
-					this.GetTree().ReloadCurrentScene();
-				}
+				player.damage(5);
 			}
 		}
 	}

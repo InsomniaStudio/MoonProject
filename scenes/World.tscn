@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Textures/PixelTexture (225).png" type="Texture" id=2]
 [ext_resource path="res://assets/TestToolsSprites/moon.jpg" type="Texture" id=3]
 [ext_resource path="res://scenes/MapMaker/GridMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Enemy/EnemySpawner/EnemySpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Enemy/StoneEnemy/StoneEnemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 2 )
@@ -34,6 +35,8 @@ mesh = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4.74352 )
 speed = 10
 mouseSens = 0.05
+haveHook = true
+haveHammer = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
@@ -42,6 +45,9 @@ environment = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8918, 0, 0.369436 )
 RangeUp = 20.0
 RangeDown = -5.0
+classicScene = ExtResource( 6 )
+stoneScene = ExtResource( 6 )
+slimeScene = ExtResource( 6 )
 
 [node name="EnemySpawner2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2117, 0, 0.369436 )
@@ -49,6 +55,9 @@ RangeUp = 20.0
 RangeDown = -5.0
 scalingPoint = 2
 scalingValue = 75
+classicScene = ExtResource( 6 )
+stoneScene = ExtResource( 6 )
+slimeScene = ExtResource( 6 )
 
 [node name="GridMap" parent="." instance=ExtResource( 4 )]
 cell_scale = 3.0

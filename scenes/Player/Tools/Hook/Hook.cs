@@ -9,18 +9,15 @@ public class Hook : Tool
 	public AnimationPlayer animPlayer2;
 	Enemy enemy;
 	Sprite sprite;
+	AudioStreamPlayer audioPlayer;
 	
 	public override void _Ready()
 	{
-		toolStats = GD.Load("res://resources/ToolStats.tres");
-		if (toolStats is ToolStats stats)
-		{
-			GD.Print(stats.cooldown);
-		}
 		raycast = GetNode<RayCast>("RayCast");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
+		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -100.0f);
 	}
@@ -46,11 +43,18 @@ public class Hook : Tool
 	public override void shoot()
 	{
 		animPlayer.Play("hook_shoot");
+		audioPlayer.Play();
 		if(raycast.IsColliding() && (((Node)raycast.GetCollider()).GetType() == typeof(Enemy)))
 		{
 			Enemy enemy = (Enemy)raycast.GetCollider();
 			if(!enemy.stoneEnemy)
+			{
 				enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
+			}
+			else
+			{
+				enemy.audioPlayer.Play();
+			}
 			GD.Print(this.Name);
 		}
 	}

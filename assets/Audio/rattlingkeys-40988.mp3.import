@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/rattlingkeys-40988.mp3-56158e539458754efb14d5a56d8e562d.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/rattlingkeys-40988.mp3"
+dest_files=[ "res://.import/rattlingkeys-40988.mp3-56158e539458754efb14d5a56d8e562d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

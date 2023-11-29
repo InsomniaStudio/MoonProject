@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/going-on-a-forest-road-gravel-and-grass-6404.mp3-060f1578ad8ab174181fd01421d29c5f.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/going-on-a-forest-road-gravel-and-grass-6404.mp3"
+dest_files=[ "res://.import/going-on-a-forest-road-gravel-and-grass-6404.mp3-060f1578ad8ab174181fd01421d29c5f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

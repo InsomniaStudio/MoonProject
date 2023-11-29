@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/watching-the-stars-background-music-for-video-8756.mp3-b1077308fd599914ecc9520d23979041.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/watching-the-stars-background-music-for-video-8756.mp3"
+dest_files=[ "res://.import/watching-the-stars-background-music-for-video-8756.mp3-b1077308fd599914ecc9520d23979041.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

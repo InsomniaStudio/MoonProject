@@ -51,3 +51,5 @@ scalingValue = 40
 classicScene = ExtResource( 5 )
 stoneScene = ExtResource( 5 )
 slimeScene = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="9"]

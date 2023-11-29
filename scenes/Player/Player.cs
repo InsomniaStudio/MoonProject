@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 public class Player : KinematicBody
@@ -16,8 +17,7 @@ public class Player : KinematicBody
 	public bool haveHook;
 	[Export]
 	public bool haveHammer;
-
-	Resource levelStats;
+	public Resource levelStats;
 	
 	public STATE state;
 	public Camera camera;
@@ -26,8 +26,13 @@ public class Player : KinematicBody
 	Hammer hammer;
 	ColorRect colorRect;
 	ColorRect colorRect2;
+	ColorRect colorRect4;
 	ProgressBar progressBar;
 	Timer colorTimer;
+	AudioStreamPlayer pickUp;
+	AudioStreamPlayer damageSound;
+	AudioStreamPlayer scaleUp;
+	AudioStreamPlayer walkSound;
 	public Vector3 moveVector;
 	public int scalingPoint;
 	int scalingProgress;
@@ -35,13 +40,13 @@ public class Player : KinematicBody
 	
 	public override void _Ready()
 	{
-//		levelStats = GD.Load("res://resources/LevelStats.tres");
-//		if (levelStats is LevelStats stats)
-//		{
-//			GD.Print(stats.level);
-//		}
+		levelStats = GD.Load("res://resources/LevelStats.tres");
+		if (levelStats is LevelStats stats)
+		{
+			GD.Print(stats.level);
+		}
 		state = STATE.MOVING;
-		scalingPoint = 0;
+		scalingPoint = 3;
 		scalingProgress = 0;
 		health = 100;
 		camera = this.GetNode<Camera>("Camera");
@@ -49,8 +54,13 @@ public class Player : KinematicBody
 		hammer = camera.GetNode<Hammer>("Hammer");
 		colorRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect");
 		colorRect2 = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect2");
+		colorRect4 = GetNode<CanvasLayer>("CanvasLayer").GetNode<ColorRect>("ColorRect4");
 		progressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<ProgressBar>("ProgressBar");
 		colorTimer = GetNode<Spatial>("Timers").GetNode<Timer>("ColorTimer");
+		pickUp = GetNode<Spatial>("AudioPlayers").GetNode<AudioStreamPlayer>("PickUp");
+		damageSound = GetNode<Spatial>("AudioPlayers").GetNode<AudioStreamPlayer>("Damage");
+		scaleUp = GetNode<Spatial>("AudioPlayers").GetNode<AudioStreamPlayer>("ScaleUp");
+		walkSound = GetNode<Spatial>("AudioPlayers").GetNode<AudioStreamPlayer>("Walking");
 		moveVector = new Vector3(0.0f, 0.0f, 0.0f);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		hook.visibility(false);
@@ -62,7 +72,10 @@ public class Player : KinematicBody
 	public override void _Process(float delta)
 	{
 		if(Input.IsActionPressed("ui_cancel"))
-			GetTree().Quit();
+		{
+			saveGame();
+			GetTree().ChangeSceneTo((PackedScene)ResourceLoader.Load("res://scenes/Levels/MainMenu/MainMenu.tscn"));
+		}
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -123,6 +136,11 @@ public class Player : KinematicBody
 			hammer.visibility(true);
 		}
 
+		if(moveVector != new Vector3(0.0f, 0.0f, 0.0f) && !walkSound.Playing)
+			walkSound.Play();
+		else if(moveVector == new Vector3(0.0f, 0.0f, 0.0f) && walkSound.Playing)
+			walkSound.Stop();
+
 		if(moveVector != new Vector3(0.0f, 0.0f, 0.0f) && tool!=null)
 			tool.move(true);
 		else if(tool!=null)
@@ -137,14 +155,16 @@ public class Player : KinematicBody
 		if(scalingPoint >= enemyScalingPoint)
 		{
 			scalingProgress += enemyScalingValue;
-			GD.Print(scalingProgress);
 			if(scalingProgress>=100)
 			{
 				colorRect2.Visible = true;
 				scale();
 			}
 			else
+			{
+				pickUp.Play();
 				colorRect.Visible = true;
+			}
 			colorTimer.Start();
 			return true;
 		}
@@ -153,8 +173,21 @@ public class Player : KinematicBody
 			return false;
 		}
 	}
+
+	public void damage(int value)
+	{
+		health -= value;
+		damageSound.Play();
+		colorRect4.Visible = true;
+		colorTimer.Start();	
+		if (health <= 0)
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
 	void scale()
 	{
+		scaleUp.Play();
 		if(scalingPoint < 3)
 		{
 			scalingPoint++;
@@ -165,10 +198,25 @@ public class Player : KinematicBody
 		scalingProgress=0;
 	}
 
+	void saveGame()
+	{
+		levelStats = GD.Load("res://resources/LevelStats.tres");
+		
+		if (levelStats is LevelStats stats)
+		{
+			GD.Print(stats.level);
+			Godot.File namefile = new Godot.File();
+			namefile.Open("user://savegame.dat", Godot.File.ModeFlags.Write);
+			namefile.Store32((uint)stats.level);
+			namefile.Close();
+		}
+	}
+
 	public void _on_ColorTimer_timeout()
 	{
 		colorRect.Visible = false;
 		colorRect2.Visible = false;
+		colorRect4.Visible = false;
 	}
 
 }

@@ -8,6 +8,7 @@ public class Hammer : Tool
 	RayCast raycast;
 	AnimationPlayer animPlayer;
 	public AnimationPlayer animPlayer2;
+	AudioStreamPlayer audioPlayer;
 	Enemy enemy;
 	Sprite sprite;
 	
@@ -17,6 +18,7 @@ public class Hammer : Tool
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
+		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -5.0f);
 	}
@@ -41,6 +43,7 @@ public class Hammer : Tool
 	public override void shoot()
 	{
 		animPlayer.Play("hammer_shoot");
+		audioPlayer.Play();
 		if(raycast.IsColliding() && ((Node)raycast.GetCollider()).GetType() == typeof(Enemy))
 		{
 			enemy.scaleBack(1);

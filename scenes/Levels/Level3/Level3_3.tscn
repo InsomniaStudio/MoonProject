@@ -34,7 +34,7 @@ stoneScene = ExtResource( 5 )
 slimeScene = ExtResource( 4 )
 
 [node name="EnemySpawner2" parent="." index="7" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9352, 0, 15.8731 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58456, 0, 15.8731 )
 scalingPoint = 1
 classicScene = ExtResource( 3 )
 stoneScene = ExtResource( 5 )
@@ -47,7 +47,7 @@ stoneScene = ExtResource( 5 )
 slimeScene = ExtResource( 4 )
 
 [node name="EnemySpawner4" parent="." index="9" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.44828, 0, -6.99173 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68252, 0, -6.99173 )
 classicScene = ExtResource( 3 )
 stoneScene = ExtResource( 5 )
 slimeScene = ExtResource( 4 )

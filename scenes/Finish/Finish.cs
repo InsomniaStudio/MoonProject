@@ -11,6 +11,7 @@ public class Finish : Area
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer.Play("enter");
+        levelStats = GD.Load("res://resources/LevelStats.tres");
         if(levelStats is LevelStats stats)
                 GD.Print(stats.level);
     }
@@ -19,9 +20,12 @@ public class Finish : Area
         if(body.GetType() == typeof(Player))
         {
             Player player = (Player)body;
-            if(levelStats is LevelStats stats)
-                stats.level++;
-            if(player.scalingPoint >= 3) GetTree().ChangeSceneTo(nextLevel);
+            if(player.scalingPoint >= 3) 
+            {
+                if(levelStats is LevelStats stats)
+                    stats.level++;
+                GetTree().ChangeSceneTo(nextLevel);
+            }
         }
     }
 }

@@ -20,6 +20,7 @@ MusicPlayer="*res://scenes/GlobalAudioPlayer/GlobalAudioPlayer.tscn"
 
 [display]
 
+window/size/fullscreen=true
 window/size/test_width=1024
 window/size/test_height=600
 window/stretch/mode="viewport"

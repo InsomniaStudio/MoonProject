@@ -17,6 +17,8 @@ public class Player : KinematicBody
 	public bool haveHook;
 	[Export]
 	public bool haveHammer;
+	[Export]
+	public bool finalLevel;
 	public Resource levelStats;
 	
 	public STATE state;
@@ -46,7 +48,7 @@ public class Player : KinematicBody
 			GD.Print(stats.level);
 		}
 		state = STATE.MOVING;
-		scalingPoint = 3;
+		scalingPoint = 0;
 		scalingProgress = 0;
 		health = 100;
 		camera = this.GetNode<Camera>("Camera");
@@ -188,7 +190,7 @@ public class Player : KinematicBody
 	void scale()
 	{
 		scaleUp.Play();
-		if(scalingPoint < 3)
+		if(scalingPoint < 3 || finalLevel)
 		{
 			scalingPoint++;
 			this.Scale *= 1.0f+0.25f;

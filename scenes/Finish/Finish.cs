@@ -21,7 +21,7 @@ public class Finish : Area
             Player player = (Player)body;
             if(levelStats is LevelStats stats)
                 stats.level++;
-            if(player.scalingPoint == 3) GetTree().ChangeSceneTo(nextLevel);
+            if(player.scalingPoint >= 3) GetTree().ChangeSceneTo(nextLevel);
         }
     }
 }

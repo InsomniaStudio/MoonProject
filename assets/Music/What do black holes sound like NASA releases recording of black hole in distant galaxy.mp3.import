@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/What do black holes sound like NASA releases recording of black hole in distant galaxy.mp3-a6d5e8ec8a77496f25a02eaac90354b0.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/What do black holes sound like NASA releases recording of black hole in distant galaxy.mp3"
+dest_files=[ "res://.import/What do black holes sound like NASA releases recording of black hole in distant galaxy.mp3-a6d5e8ec8a77496f25a02eaac90354b0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

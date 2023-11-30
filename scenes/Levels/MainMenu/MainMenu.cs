@@ -4,17 +4,25 @@ using System;
 public class MainMenu : Control
 {
     public Resource saveGame;
+    AudioStreamPlayer musicPlayer;
     string[] levels = {"res://scenes/Levels/Level1/Level1_1.tscn",
                         "res://scenes/Levels/Level1/Level1_2.tscn",
                         "res://scenes/Levels/Level1/Level1_3.tscn",
                         "res://scenes/Levels/Level2/Level2_1.tscn",
                         "res://scenes/Levels/Level2/Level2_2.tscn",
-                        "res://scenes/Levels/Level2/Level2_3.tscn"};
+                        "res://scenes/Levels/Level2/Level2_3.tscn",
+                        "res://scenes/Levels/Level3/Level3_1.tscn",
+                        "res://scenes/Levels/Level3/Level3_2.tscn",
+                        "res://scenes/Levels/Level3/Level3_3.tscn",
+                        "res://scenes/Levels/Level4/Level4.tscn",
+                        "res://scenes/Levels/Ending/Ending.tscn"};
 
     public override void _Ready()
     {
         saveGame = ResourceLoader.Load("res://resources/LevelStats.tres");
         Input.MouseMode = Input.MouseModeEnum.Visible;
+        musicPlayer = GetParent().GetNode<AudioStreamPlayer>("MusicPlayer");
+        musicPlayer.Play();
     }
 
     public void _on_NewGame_pressed()

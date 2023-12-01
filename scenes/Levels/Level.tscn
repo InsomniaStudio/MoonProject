@@ -34,7 +34,7 @@ environment = SubResource( 5 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 speed = 10
-mouseSens = 0.05
+mouseSens = 0.12
 
 [node name="GridMap" parent="." instance=ExtResource( 3 )]
 

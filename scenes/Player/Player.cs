@@ -20,6 +20,7 @@ public class Player : KinematicBody
 	[Export]
 	public bool finalLevel;
 	public Resource levelStats;
+	public Resource mouseSensitivity;
 	
 	public STATE state;
 	public Camera camera;
@@ -46,6 +47,11 @@ public class Player : KinematicBody
 		if (levelStats is LevelStats stats)
 		{
 			GD.Print(stats.level);
+		}
+		mouseSensitivity = GD.Load("res://resources/MouseSens.tres");
+		if(mouseSensitivity is MouseSens sens)
+		{
+			mouseSens = (float)sens.sensitivity;
 		}
 		state = STATE.MOVING;
 		scalingPoint = 0;
@@ -195,12 +201,12 @@ public class Player : KinematicBody
 			scalingPoint++;
 			this.Scale *= 1.0f+0.25f;
 //			hook.upgrade();
-			hammer.upgrade();
+			// hammer.upgrade();
 		}
 		scalingProgress=0;
 	}
 
-	void saveGame()
+	public void saveGame()
 	{
 		levelStats = GD.Load("res://resources/LevelStats.tres");
 		

@@ -10,6 +10,7 @@ public class Hook : Tool
 	Enemy enemy;
 	Sprite sprite;
 	AudioStreamPlayer audioPlayer;
+	Player player;
 	
 	public override void _Ready()
 	{
@@ -18,6 +19,7 @@ public class Hook : Tool
 		animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
 		sprite = GetNode<CanvasLayer>("CanvasLayer").GetNode<Sprite>("Sprite");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		player = GetParent().GetParent<Player>();
 		raycast.Enabled = true;
 		raycast.CastTo = new Vector3(0.0f, 0.0f, -100.0f);
 	}
@@ -50,12 +52,12 @@ public class Hook : Tool
 			if(!enemy.stoneEnemy)
 			{
 				enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y, this.GlobalTranslation.z);
+				if(player.scalingPoint>5) enemy.Translation = new Vector3(this.GlobalTranslation.x, enemy.Translation.y+5, this.GlobalTranslation.z);
 			}
 			else
 			{
 				enemy.audioPlayer.Play();
 			}
-			GD.Print(this.Name);
 		}
 	}
 	

@@ -1,15 +1,17 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Finish/Finish.cs" type="Script" id=1]
-[ext_resource path="res://resources/LevelStats.tres" type="Resource" id=2]
+[ext_resource path="res://assets/Textures/PixelTexture (10).png" type="Texture" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.75396, 1, 1.89946 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.996078, 0.988235, 0.466667, 1 )
+albedo_texture = ExtResource( 2 )
 
 [sub_resource type="PrismMesh" id=2]
-material = SubResource( 3 )
+material = SubResource( 5 )
 left_to_right = 0.0
 
 [sub_resource type="Animation" id=4]
@@ -42,7 +44,6 @@ tracks/1/keys = {
 
 [node name="Finish" type="Area"]
 script = ExtResource( 1 )
-levelStats = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -59,5 +60,11 @@ anims/enter = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.651201, 1.36162, 0 )
+light_color = Color( 0.862745, 1, 0.192157, 1 )
+light_energy = 7.0
+omni_range = 3.56431
 
 [connection signal="body_entered" from="." to="." method="_on_Finish_body_entered"]

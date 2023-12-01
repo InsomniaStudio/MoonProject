@@ -49,6 +49,31 @@ margin_bottom = 522.0
 rect_scale = Vector2( 5, 5 )
 text = "Grasp the Moon"
 
+[node name="MouseSens" type="Label" parent="."]
+margin_left = 111.0
+margin_top = 400.0
+margin_right = 151.0
+margin_bottom = 416.0
+text = "Mouse sensitivity:"
+
+[node name="Plus" type="Button" parent="."]
+margin_left = 205.0
+margin_top = 426.0
+margin_right = 230.0
+margin_bottom = 448.0
+text = "+"
+icon_align = 1
+
+[node name="Minus" type="Button" parent="."]
+margin_left = 126.0
+margin_top = 426.0
+margin_right = 151.0
+margin_bottom = 448.0
+text = "-"
+icon_align = 1
+
 [connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="Plus" to="." method="_on_Plus_pressed"]
+[connection signal="pressed" from="Minus" to="." method="_on_Minus_pressed"]

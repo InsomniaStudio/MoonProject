@@ -24,6 +24,7 @@ public class Finish : Area
             {
                 if(levelStats is LevelStats stats)
                     stats.level++;
+                player.saveGame();
                 GetTree().ChangeSceneTo(nextLevel);
             }
         }

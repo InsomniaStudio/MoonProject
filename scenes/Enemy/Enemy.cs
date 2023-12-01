@@ -42,8 +42,8 @@ public class Enemy : KinematicBody
 		hammerDamage = GetNode<Particles>("Particles");
 		animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
-		if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
-		if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+		// if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+		// if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 		player = this.GetParent().GetNode<Player>("Player");
 		moveVector = new Vector3(1.0f, 0.0f, 0.0f);
 	}
@@ -84,8 +84,9 @@ public class Enemy : KinematicBody
 		Enemy enemy = (Enemy)(ResourceLoader.Load<PackedScene>("res://scenes/Enemy/ClassicEnemy/ClassicEnemy.tscn").Instance());
 		enemy.scalingPoint = scalingPoint;
 		enemy.scalingValue = scalingValue;
-		enemy.enemySpawner = this.enemySpawner;
 		this.enemySpawner.enemyCounter++;
+		enemy.enemySpawner = this.enemySpawner;
+		audioPlayer.Play();
 		this.GetParent().AddChild(enemy);
 		enemy.Translation = this.Translation + new Vector3(2.0f, 0.0f, 0.0f);
 	}
@@ -106,8 +107,8 @@ public class Enemy : KinematicBody
 		else
 		{
 			sprite.Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-			if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
-			if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+			// if(stoneEnemy) sprite.Modulate = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+			// if(slimeEnemy) sprite.Modulate = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 		}
 	}
 

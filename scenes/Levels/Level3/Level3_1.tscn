@@ -27,17 +27,17 @@ transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, -22.396, 7.5, 16.455 )
 nextLevel = ExtResource( 7 )
 
 [node name="EnemySpawner" parent="." index="6" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7106, 0, -18.4419 )
-RangeUp = 2.0
-RangeDown = -16.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7106, 0, 29.5826 )
+RangeUp = 28.0
+RangeDown = -8.0
 classicScene = ExtResource( 4 )
 stoneScene = ExtResource( 6 )
 slimeScene = ExtResource( 4 )
 
 [node name="EnemySpawner2" parent="." index="7" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9772, 0, 30.4355 )
-RangeUp = 2.0
-RangeDown = -16.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9772, 0, 29.2373 )
+RangeUp = 28.0
+RangeDown = 1.0
 scalingPoint = 2
 classicScene = ExtResource( 5 )
 stoneScene = ExtResource( 5 )

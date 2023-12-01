@@ -18,7 +18,7 @@ ambient_light_color = Color( 0.211765, 0.188235, 0.384314, 1 )
 ambient_light_energy = 7.5
 
 [sub_resource type="SpatialMaterial" id=7]
-albedo_color = Color( 0.960784, 0.909804, 0.780392, 1 )
+albedo_color = Color( 0.835294, 0.733333, 1, 1 )
 albedo_texture = ExtResource( 5 )
 uv1_scale = Vector3( 20, 20, 20 )
 
